@@ -1,0 +1,152 @@
+\startproject iras
+\mainlanguage[hu]
+\setupalign[
+  justified,
+  nothanging,
+  nohz,
+  hyphenated,
+  morehyphenated,
+  tolerant,
+]
+\setupinterlinespace[height=0.75,depth=0.25]
+\setuplayout[
+  grid=yes,
+  location=middle,
+]
+\def\PagenumberingCommand#1{\doifnot\pagenumber1{#1}}
+\setuppagenumbering[
+  location={footer,middle},
+  command=\PagenumberingCommand,
+]
+\setuppapersize[A4]
+\setuplayout[
+    backspace=30mm,
+    width=150mm,
+    topspace=30mm,
+    header=0mm,
+    footer=15mm,
+    footerdistance=0mm,
+    bottom=0mm,
+    bottomdistance=0mm,
+    height=247mm
+]
+
+% Betűkészlet
+%\setupbodyfont[libertinus,12pt]
+\setupbodyfont[12pt]
+
+% Vékony spácium bizonyos karakterek előtt (:;?!)
+\definecharacterspacing [magyarpunctuation]
+\setupcharacterspacing [magyarpunctuation] ["0021] [left=.1,alternative=1] % ! % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003A] [left=.1,alternative=1] % : % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003B] [left=.1,alternative=1] % ; % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003F] [left=.1,alternative=1] % ? % strip preceding space(char)
+
+% A magyar nyelv beállításai
+\startsetups[magyar]
+  % Vékony spácium bizonyos karakterek előtt (:;?!)
+  \setcharacterspacing[magyarpunctuation]
+  \setupindenting[%
+    yes,% A bekezdéseket behúzással kezdjük.
+    %next,% Az első bekezdés nincs behúzva.
+    medium% Közepes méretű (átmeneti megoldás: igazából a mérete 24 cicerós sorig 1 kvirt, nagyobbbnál 2 kvirt kellene legyen -> TENNIALÓ)
+  ]
+\stopsetups
+
+\setuplanguage[hu][%
+  setups=magyar,% Érvényesíti a fent megadott beállításokat.
+  spacing=packed% Frenchspacing (Gyurgyák 319. o.: egyenletes szóközök).
+                % http://wiki.contextgarden.net/French_spacing).
+]
+
+% TENNIVALÓ: csak magyar nyelvre
+% Idézetek (Gyurgyák, 86--87. o.).
+\definedelimitedtext[quote][location=text]
+\setupdelimitedtext[quote:1][
+  left={\lowerleftdoubleninequote},
+  right={\upperrightdoubleninequote},
+  spaceafter=0
+]
+\setupdelimitedtext[quote:2][
+  left={\rightguillemot\nobreak\hskip-.07em},
+  right={\kern-0.03em\leftguillemot},
+  spaceafter=0
+]
+\setupdelimitedtext[quote:3][
+  left={\upperleftsingleninequote},
+  right={\upperrightsingleninequote},
+  spaceafter=0
+]
+
+\defineframedtext[kerdes][align=center,offset=0.5ex,style=italic,width=\dimexpr0.8\dimexpr\makeupwidth]
+
+\defineframedtext[kivonat][offset=0.5ex, frame=off,style=italic,width=\dimexpr0.8\dimexpr\makeupwidth]
+
+%\showgrid[all]
+
+\definehead[cim][chapter]
+\setuphead[cim][number=no,align=middle,after={},]
+
+\startproduct iras
+\startbodymatter
+
+\cim{Beadandó dolgozat}
+\startlinealignment[middle]
+2019. április
+\stoplinealignment
+
+\blank[2*big]
+
+\noindentation Kedves tanulók! 
+\blank
+\noindentation Megpróbáltam nektek elmesélni, hogy a matematika, ami kizárólag a logikus emberi gondolkodás gyermeke, mennyire erős és örök.
+Valóban, a matematikát nem lehet gondolkodás nélkül megúszni, csak ha az ember megszokja, hogy itt egy probléma és törnöm kell a fejem rajta, ha meg akarom oldani.
+Sokakat ez riaszt, és jobbnak látják, ha azt mondják maguknak, hogy ők ezeket a típusú problémákat nem akarják megoldani, őket ez nem érdekli.
+George Bernard Shaw mondta: \language[en] ,,Two percent of the people think; three percent of the people think they think; and ninety-five percent of the people would rather die than think.'' \language[hu]
+Én arra buzdítalak titeket, hogy eddzétek az agyatokat, nehogy eltunyuljon.
+A matematika ebben segít.
+Mint minden edzés, először kellemetlen ez is.
+De ha nem adjátok fel, hamarosan beérik és meglepően szép gyümölcsöket fog teremni.
+E gyümölcsök leszakításáért persze aztán is meg kell majd dolgozni, de az már olyan lesz, mint egy kellemes tavaszi szüret.
+
+\startsubject[title=Összeadás és kivonás]
+
+A harmadik alkalommal kiderült, hogy a pozitív és a negatív számokkal való vegyesen végzett összeadás és a kivonás nem megy jól.
+Elmondtam, hogy ezt muszáj orvosolni, azt hiszem ebben mindnyájan egyetértettünk.
+Számomra úgy tűnik, két oldalról van itt hiba.
+Először is, sokszor fejben próbáljátok elvégezni a műveleteket amiket jobb lenne papíron, mert a fejszámolás még nem megy olyan biztosan.
+Sokan itt-ott néhány tizessel vagy százassal elszámoljátok magatokat és meg vagytok győződve róla, hogy a kapott eredmény jó.
+Keveseknél láttam szépen papíron levezetett összeadásokat.
+A jövőben aki fejben számol és hibásan, az fog kapni egy papíron elvégzendő számolási feladatot.
+Most azonban mindenki kap néhányat, de először álljon itt emlékeztetőül, hogy miképpen kell összeadni:
+
+,,Az összeadást többjegyű összeadandók esetén a következő módon végezzük: a számokat úgy írjuk egymás alá, hogy az azonos helyi értékű számjegyek egymás alá kerüljenek.
+Az utolsó összeadandót aláhúzzuk. Például:
+
+{\framed[width=\textwidth,frame=off,align=middle,after={\blank}]{
+{\framed[frame=off,align={flushright,nothyphenated,verytolerant}]{
+\tt 2435\\
+247\\
+\underbar{+1413}\\
+4095\\
+}}
+}}
+
+Az összeadást a legkisebb helyi értékű jegyenél kezdjük: $3+7+5=15$.
+Az eredmény $5$ egyesét leírjuk az egyesek alá, $1$ tizesét pedig a tízesekhez adjuk hozzá: $1+1+4+3=9$.
+A százasok összege: $4+2+4=10$, tehát a százasok oszlopa alá $0$-t írunk, és az $1$ ezrest az ezresekhez adjuk hozzá: $1+1+2=4$.
+A $4$-et az ezresek alá írjuk. 
+A három adott többjegyű szám összege tehát 4095.
+Az összeadást felülről lefelé is végezzük el, mert számításunk helyességét így ellenőrizhetjük.''
+
+\startsubject[title=Prímszámok, prímtényezőkre bontás]
+
+
+
+\emptylines[1]\noindentation Hosszúhetény, 2018. május 5.
+
+\stopsubject
+
+\stopbodymatter
+\stopproduct
+\stopproject
