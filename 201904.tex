@@ -10,9 +10,12 @@
 ]
 \setupinterlinespace[height=0.75,depth=0.25]
 \setuplayout[
-  grid=yes,
+  grid=no,
   location=middle,
 ]
+\setupformulas[align=middle]
+%\setupmathalignment[grid=no]
+
 \def\PagenumberingCommand#1{\doifnot\pagenumber1{#1}}
 \setuppagenumbering[
   location={footer,middle},
@@ -78,9 +81,22 @@
   spaceafter=0
 ]
 
+\definebodyfontenvironment[default][em=italic]
+
 \defineframedtext[kerdes][align=center,offset=0.5ex,style=italic,width=\dimexpr0.8\dimexpr\makeupwidth]
 
 \defineframedtext[kivonat][offset=0.5ex, frame=off,style=italic,width=\dimexpr0.8\dimexpr\makeupwidth]
+
+\definehead[feladat][subsubsubject]
+\setuphead[feladat][
+    number=no,
+    textdistance=0pt,
+    alternative=text,
+    style=bf,
+    commandafter={\hbox{.\quad}},
+]
+
+\definebar[mathubar][underbar]  % enélkül esetleg elcsúszik az aláhúzás
 
 %\showgrid[all]
 
@@ -90,9 +106,10 @@
 \startproduct iras
 \startbodymatter
 
-\cim{Beadandó dolgozat}
+\cim{Elolvasandó és beadandó}
 \startlinealignment[middle]
-2019. április
+2019. április\\
+{{azonosító}}
 \stoplinealignment
 
 \blank[2*big]
@@ -109,6 +126,15 @@ Mint minden edzés, először kellemetlen ez is.
 De ha nem adjátok fel, hamarosan beérik és meglepően szép gyümölcsöket fog teremni.
 E gyümölcsök leszakításáért persze aztán is meg kell majd dolgozni, de az már olyan lesz, mint egy kellemes tavaszi szüret.
 
+A dolgozatot külön lapon vagy lapokon, A4-es fénymásolópapíron kérem beadni.
+Szép munkákat várok.
+Azt javaslom először dolgozzatok külön munkalapra (ami lehet akár egy spirálfüzetből kitépett négyzetrácsos lap is), aztán ha végeztetek a feladattal, másoljátok szépen át a beadandó lapjára.
+Minden esetben tollal dolgozzatok!
+Ha valamit nem tudtatok megoldani, akkor adjátok be a hozzá tartozó munkalapot, hogy tudjam értékelni a próbálkozást, és lássam, hogy mi okozott gondot: ezt a következő órákon majd át tudjuk beszélni.
+A munkalapokon ki ne satírozzatok semmit, egy vagy két vonallal áthúzni viszont természetesen szabad bármit.
+Az elbírálás során a beadandó lap természetesen nagyobb súllyal bír, de ha a munkalapon látom, hogy volt valamiféle próbálkozás a feladat megoldására, akkor azt is fogom értékelni.
+
+
 \startsubject[title=Összeadás és kivonás]
 
 A harmadik alkalommal kiderült, hogy a pozitív és a negatív számokkal való vegyesen végzett összeadás és a kivonás nem megy jól.
@@ -116,31 +142,259 @@ Elmondtam, hogy ezt muszáj orvosolni, azt hiszem ebben mindnyájan egyetértett
 Számomra úgy tűnik, két oldalról van itt hiba.
 Először is, sokszor fejben próbáljátok elvégezni a műveleteket amiket jobb lenne papíron, mert a fejszámolás még nem megy olyan biztosan.
 Sokan itt-ott néhány tizessel vagy százassal elszámoljátok magatokat és meg vagytok győződve róla, hogy a kapott eredmény jó.
-Keveseknél láttam szépen papíron levezetett összeadásokat.
+Keveseknél láttam szépen papíron levezetett számításokat.
 A jövőben aki fejben számol és hibásan, az fog kapni egy papíron elvégzendő számolási feladatot.
-Most azonban mindenki kap néhányat, de először álljon itt emlékeztetőül, hogy miképpen kell összeadni:
+Most azonban mindenki kap néhányat, de először álljon itt emlékeztetőül, hogy mi az összeadás és a kivonás és miképpen kell összeadni és kivonni:
 
-,,Az összeadást többjegyű összeadandók esetén a következő módon végezzük: a számokat úgy írjuk egymás alá, hogy az azonos helyi értékű számjegyek egymás alá kerüljenek.
+Két munkás közül az egyik egy óra alatt 34 szegecset illesztett be, a másik 27-et. Hány szegecset illesztettek be együtt egy óra alatt?
+
+Annyi szegecset illesztettek be, mint amennyi 34 és 27 együttvéve, amelynek a matematikai írásmódja: $34+27=61$ (olv.: harmincnégy {\em plusz} huszonhét egyenlő hatvaneggyel). Ez a művelet az összeadás, műveleti jele: $+$. A 34-et és a 27-et összeadandóknak vagy {\em tagoknak}, az eredményt, a 61-et pedig {\em összegnek} nevezzük.
+
+\startformula \startmathalignment[n=1]
+\NC \text{összeadandó} + \text{összeadandó} = \text{összeg} \NR[+]
+\NC \text{tag} + \text{tag} = \text{összeg} \NR[+]
+\stopmathalignment \stopformula
+
+Az összeadás első fontos tulajdonsága, hogy a {\em tagok sorrendje felcserélhető}, az összegük nem változik, azaz az összeg független az összeadás sorrendjétől. Ez az összeadás felcserélési (kommutatív) törvénye.
+
+\startformula 3+5=5+3=8 \stopformula
+
+Az összeadás második fontos tulajdonsága, hogy a tagokat tetszés szerint csoportosíthatjuk, az összeg nem változik. Például három tag esetén bármelyik kettő összegéhez hozzáadhatjuk a harmadik tagot, az összeg nem változik. Ez az összeadás csoportosítási (asszociatív) törvénye.
+
+\startformula (3+5)+7=3+(5+7)=15 \stopformula
+
+Az összeadást többjegyű összeadandók esetén a következő módon végezzük: a számokat úgy írjuk egymás alá, hogy az azonos helyi értékű számjegyek egymás alá kerüljenek.
 Az utolsó összeadandót aláhúzzuk. Például:
 
-{\framed[width=\textwidth,frame=off,align=middle,after={\blank}]{
-{\framed[frame=off,align={flushright,nothyphenated,verytolerant}]{
-\tt 2435\\
-247\\
-\underbar{+1413}\\
-4095\\
+\startformula
+%{\framed[width=\textwidth,frame=off,align=middle,after={\blank}]{
+{\framed[frame=off,align={flushright,nothyphenated,verytolerant},before={},after={}]{
+$2435$\\
+$247$\\
+\underbar{$+1413$}\\
+$4095$\\
 }}
-}}
+%}}
+\stopformula
 
 Az összeadást a legkisebb helyi értékű jegyenél kezdjük: $3+7+5=15$.
 Az eredmény $5$ egyesét leírjuk az egyesek alá, $1$ tizesét pedig a tízesekhez adjuk hozzá: $1+1+4+3=9$.
 A százasok összege: $4+2+4=10$, tehát a százasok oszlopa alá $0$-t írunk, és az $1$ ezrest az ezresekhez adjuk hozzá: $1+1+2=4$.
 A $4$-et az ezresek alá írjuk. 
 A három adott többjegyű szám összege tehát 4095.
-Az összeadást felülről lefelé is végezzük el, mert számításunk helyességét így ellenőrizhetjük.''
+Az összeadást felülről lefelé is végezzük el, mert számításunk helyességét így ellenőrizhetjük.
+
+15\,m vörösréz huzalból elhasználtunk 9\,m-t. Hány méter maradt?
+
+Annyi maradt, amennyivel több a 15\,m, mint a 9\,m, ennek matematikai írásmódja: $15-9=6$ (olv.: tizenöt {\em mínusz} kilenc egyenlő hattal).
+Ez a művelet a kivonás, műveleti jele: $-$.
+
+Azt a számot kerestük, amelyhet 9-hez adva összeül 15-öt kapunk.
+A kivonás az összeadás fordított művelete. Kivonásnál ismert az egyik összeadandó és az összeg és keressük a másik összeadandót. Az összeget {\em kisebbítendőnek}, az ismert összeadandót {\em kivonandónak}, az ismeretlen összeadandót pedig {\em különbségnek} vagy {\em maradéknak} nevezzük.
+
+\startformula \startmathalignment[n=1]
+\NC \text{kisebbítendő} - \text{kivonandó} = \text{különbség} \NR[+]
+\NC \text{kisebbítendő} - \text{kivonandó} = \text{maradék} \NR[+]
+\stopmathalignment \stopformula
+
+A kivonás helyes elvégzésének próbája az összeadás:
+
+\startformula \text{kivonandó} + \text{különbség} = \text{kisebbítendő} \stopformula
+
+Fontos tulajdonsága a kivonásnak, hogy a különbség értéke nem változik, ha a kisebbítendőhöz és a kivonandóhoz {\em ugyanazt a számot hozzáadjuk, vagy mindkettőből ugyanazt kivonjuk}.
+
+\startformula \startmathalignment[n=1]
+\NC 13-11=2 \NR[+]
+\NC (13+3)-(11+3)=16-14=2 \NR[+]
+\NC (13-3)-(11-3)=10-8=2 \NR[+]
+\stopmathalignment \stopformula
+
+A kisebbítendő növelésével ill{.} csökkentésével a különbség ugyanannyival nő ill{.} csökken. A kivonandó növelésével a különbség ugyanannyival csökken, csökkentésével ugyanannyival nő.
+
+Több számjegyű számok kivonását úgy végezzük el, hogy a számokat helyi értéküknek megfelelően egymás alá írjuk és a kivonást a legkisebb helyi értékű jegynél kezdjük:
+
+\startformula
+%{\framed[width=\textwidth,frame=off,align=middle,after={\blank}]{
+{\framed[frame=off,align={flushright,nothyphenated,verytolerant},before={},after={}]{
+$5832$\\
+\underbar{$-3521$}\\
+$2311$\\
+}}
+%}}
+\stopformula
+
+1 meg 1 az 2 (leírjuk az 1-et), 2 meg 1 az 3 (leírjuk az 1-et), 5 meg 3 az nyolc (leírjuk a 3-at), 3 meg 2 az öt (leírjuk az 2-t). A különbség: 2311.
+
+Ellenőrzés: $2311+3521=5832$.
+
+Amikor a kisebbítendő valamelyik számjegye kisebb, mint a kivonandó ugyanolyan helyi értékű számjegye, akkor felhasználjuk a már említett törvényt, amely szerint a különbség nem változik, ha a kisebbítendőt és a kivonandót ugyanazzal a számmal növeljük.
+
+\startformula
+%{\framed[width=\textwidth,frame=off,align=middle,after={\blank}]{
+{\framed[frame=off,align={flushright,nothyphenated,verytolerant},before={},after={}]{
+$3762$\\
+\underbar{$-1835$}\\
+$1927$\\
+}}
+%}}
+\stopformula
+
+Mivel 2 egyesből 5 egyest nem vonhatunk ki, a kisebbítendőhöz 10 egyest hozzáadunk, így 12 egyesünk lesz, és hogy a különbség ne változzék, a kivonandóhoz ugyancsak 10 egyest, de 1 tízes alakjában hozzáadunk a kivonandó tízeseihez is. Hasonlóan járunk el a százasoknál is, ahol 10 százassal (1 ezressel) növeljük a kisebbítendőt és 1 ezressel a kivonandót. A kivonást tehát így végezzük: 5 meg 7 az 12 (leírjuk a 7-et), 1 meg 3 az 4 meg 2 az 6 (leírjuk a 2-t), 8 meg 9 az 17 (leírjuk a 9-et), 1 meg 1 az 2, 2 meg 1 az 3 (leírjuk az egyet). A különbség vagy maradék: 1927. 
+
+Próba: ha a maradékot a kivonandóhoz hozzáadva a kisebbítendőt kapjuk, helyes az eredményünk.
+
+\startformula
+%{\framed[width=\textwidth,frame=off,align=middle,after={\blank}]{
+{\framed[frame=off,align={flushright,nothyphenated,verytolerant},before={},after={}]{
+$1835$\\
+\underbar{$+1927$}\\
+$3762$\\
+}}
+%}}
+\stopformula
+
+Az $\mathbb{N}$ (természetes számok) számhalmazban a kivonást csak akkor végezhetjük el, ha a $\text{kisebbítendő}\geq\text{kivonandó}$ feltétel teljesül.
+
+\startfeladat[title=Feladat I]
+Végezd el az alábbi műveleteket:  
+
+{{feladatok1}}  
+\stopfeladat
+
+\startfeladat[title=Feladat II]
+Add össze a számokat 1-től 100-ig, az 1-el kezdve és a 100-al befejezve.
+\stopfeladat
+\blank
+
+Ez volt a kulimunka. Kellemetlen, de szükséges. Viszont észrevehettétek, hogy negatív számokkal most nem kellett bajlódnotok. Eljön az is majd, nem kell félni. Innentől érdekesebb feladatok jönnek.
 
 \startsubject[title=Prímszámok, prímtényezőkre bontás]
 
+Beszéltünk a prímszámokról és az összetett számok prímtényezőkre bontásáról, de úgy érzem még barátkoznotok kell ezekkel.
+A prímszámok azért fontosak, mert rájuk épül az oszthatóság, a törtek egyszerűsítése, több szám közös többszöröseinek megtalálása, de az adatok titkosítása is.
+Lássuk!
+
+A hinduk ősidőktől fogva kitűnő matematikusok, és sajátos képességeik vannak ezen a téren.
+Mikor egyszer Hardy és Rámánudzsan Londonban taxin utazott, Hardy a taxi távozása után vette észre, hogy aktatáskáját a kocsiban felejtette.
+Kéziratok lévén a táskában, ez kétségbe ejtette, de Rámánudzsan megnyugtatta, hogy a taxi száma 1729.
+Hardy igen örült ennek, de nem hagyta nyugodni a kérdés, hogyan lehetett megjegyezni egy ilyen érdektelen számot.
+Nem érdektelen ez a szám, felelte Rámánudzsan: ez a legkisebb olyan egész szám, amely kétféleképpen bontható fel két köbszám összegére, hiszen $10^3+9^3$ is és $12^3+1^3$ is 1729.
+
+A hinduknak még a négyjegyű számok is ilyen külön sajátságokkal felruházott személyes ismerőseik.
+Nálunk a kis számokat kezelik ilyen individuumok módjára: a 2-es nem a sok szürke szám egyike, hanem sok oldalról megismert különálló egyéniség: ő az első páros szám, $1+1$, 4-nek a fele stb. 
+De akár 10-ig színezzük így a számokat, akár olyan messzeségekig, mint a hinduk, mindez csak szerény kis töredéke a végtelen számsornak, amely ezen túl szürkén hömpölyög tovább.
+
+
+
+Tudjuk ugyan, hogy vannak páros számok, igen, minden második szám páros:
+\startformula
+1, \mathubar{2}, 3, \mathubar{4}, 5, \mathubar{6}, 7, \mathubar{8}, 9, \mathubar{10}, 11, \mathubar{12}, \dots
+\stopformula
+
+ugyanígy minden harmadik szám osztható 3-mal:
+\startformula
+1, 2, \mathubar{3}, 4, 5, \mathubar{6}, 7, 8, \mathubar{9}, 10, 11, \mathubar{12}, \dots
+\stopformula
+
+minden negyedik szám 4-gyel:
+\startformula
+1, 2, 3, \mathubar{4}, 5, 6, 7, \mathubar{8}, 9, 10, 11, \mathubar{12}, \dots
+\stopformula
+
+s. í. t., ezek azonban csak kisebb-nagyobb hullámokat jelentenek, melyek, ha egyszer megindultak, egyhangúan, egyformán gördülnek tovább.
+Valóban nincs semmi váratlan, semmi egyéni szeszély, ami felélénkíthetné ezt az egyhangúságot?
+
+De van: a prímszámok szeszélyes, szabályokba nem szorítható eloszlása. Emlékezzünk csak az oszthatóságra: 
+
+\startformula \startmathalignment
+\NC \text{10 összes osztói: } \NC 1, 2, 5, 10,\NR[+]
+\NC \text{12 összes osztói: } \NC 1, 2, 3, 4, 6, 12, \NR[+]
+\NC \text{közben } \text{11 összes osztói: } \NC 1, 11.\NR[+]
+\stopmathalignment \stopformula
+
+1-gyel és önmagával minden szám osztható; vannak számok, amelyek e kettőn kívül semmi mással: ilyen például a 11. Ezeket a számokat nevezik törzsszámoknak vagy prímszámoknak.
+
+Az 1 e szempontból rendellenesen viselkedik; csak egy osztója van: 1, és ez egyszersmind önmaga. Ezért 1-et nem szokás a prímszámok közé sorolni. Az 1 neve {\em egység}.
+Eszerint a legkisebb prímszám a 2, ez egyszersmind az egyetlen páros prímszám, mert minden páros szám osztható 2-vel és ez a szám prímszám voltát csak akkor nem rontja el, ha ez a 2-es osztó maga a szám.
+
+Jelentőséget az ad a prímszámoknak, hogy minden más szám ezekből az építőkövekből rakható össze; éppen ezért nevezik a többi számot összetett számnak. Pontosabban úgy fogalmazható ez meg, hogy minden összetett szám csupa prímszám szorzataként állítható elő.
+
+Próbáljuk például 60-at szorzatként írni fel:
+\startformula
+60 = 6 \cdot 10
+\stopformula
+
+Itt 6 és 10 is tovább bontható tényezőkre:
+
+\startformula
+6=2\cdot 3 \quad\text{és}\quad 10=2 \cdot 5,
+\stopformula
+
+ezeket beírva 6 és 10 helyére:
+
+\startformula
+60=2 \cdot 3 \cdot 2 \cdot 5
+\stopformula
+
+és itt már minden tényező prímsszám.
+
+Másképp is hozzáfoghattunk volna ehhez, hiszen már láttuk, hogy 60-at nagyon sokféleképpen lehet két szám szorzataként felírni.
+Ha ebből indulunk ki:
+
+\startformula \startmathalignment
+\NC \null \NC 60=4\cdot 15, \NR[+]
+\NC \text{itt}\quad\NC 4=2\cdot 2 \quad\text{és}\quad 15=3 \cdot 5, \NR[+]
+\NC \text{tehát}\quad \NC 60=2 \cdot 2 \cdot 3 \cdot 5, \NR[+]
+\stopmathalignment \stopformula
+
+ha pedig ezt a felbontást választjuk:
+
+\startformula \startmathalignment[n=8,align={right,left,left,left,right,left,left,left}]
+\NC \NC 60\NC=2\cdot 30, \NR[+]
+\NC \text{akkor}\quad\NC 30\NC=5\cdot 6 \quad\NC\text{és itt}\quad \NC6\NC=2 \cdot 3, \quad\NC\text{tehát}\quad 30\NC=5 \cdot 2 \cdot 3, \NR[+]
+\NC \text{vagy}\quad\NC 30\NC=2\cdot 15 \quad\NC\text{és itt}\quad \NC15\NC=3 \cdot 5, \quad\NC\text{tehát}\quad 30\NC=2 \cdot 3 \cdot 5, \NR[+]
+\NC \text{vagy}\quad\NC 30\NC=3\cdot 10 \quad\NC\text{és itt}\quad \NC10\NC=2 \cdot 5, \quad\NC\text{tehát}\quad 30\NC=3 \cdot 2 \cdot 5, \NR[+]
+\stopmathalignment \stopformula
+
+\startformula
+60=2 \cdot 30,
+\stopformula
+
+látjuk tehát, hogy 30 mindenképpen a 2, 3 és 5 prímszámok szorzatára bomlik; e szorzatot írva 30 helyébe
+
+\startformula
+60=2 \cdot 2 \cdot 3 \cdot 5.
+\stopformula
+
+Bármi módon fogunk is hozzá, csak ugyanazon prímszámokra esik szét 60, legfeljebb más sorrendben lépnek fel ezek. Rendbe szedve és az egyenlő tényezők szorzatát hatványalakban írva
+
+\startformula
+60=2^{2} \cdot 3 \cdot 5.
+\stopformula
+
+Ugyanilyen könnyű bármely más összetett számot is felbontani ,,prímtényezőire’’ (és be lehet bizonyítani, hogy mindig csak egyféle felbontásra juthatunk).
+Ha első pillanatra megakadunk azon, hogyan is fogjunk hozzá, gondoljuk meg, hogy a szám legkisebb osztója (1-en kívül) biztosan prímszám, mert ha az is összetett szám volna, akkor kellene önmagánál kisebb osztójának lenni, és ez persze az eredeti számban is megvolna maradék nélkül.
+Tehát mindig a legkisebb osztót keresve, szépen legöngyölíthetők bármely szám prímtényezői, például:
+
+\startformula \startmathalignment[n=2,align={right,left}]
+\NC 90\NC=2 \,\, \cdot \,\, 45 \NR
+\NC   \NC=2\cdot\overbrace{3\,\cdot\,15} \NR
+\NC   \NC=2\cdot 3\cdot\overbrace{3\cdot 5} \NR
+\stopmathalignment \stopformula
+
+Egy ilyen felbontás jól bevilágít a szám szerkezetébe, pl. kiolvasható belőle, hogy 90 osztói 1-en kívül:
+\startformula \startmathalignment[n=2,align={left,left}]
+\NC \text{egytényezősök: } \NC 2, 3, 5, \NR
+\NC \text{kéttényezősök: } \NC 2\cdot3=\mathubar{6},\quad 2\cdot5=\mathubar{10},\quad 3\cdot3=\mathubar{9},\quad 3\cdot5=\mathubar{15}, \NR
+\NC \text{háromtényezősök: } \NC 2\cdot3\cdot3=\mathubar{18},\quad 2\cdot3\cdot5=\mathubar{30},\quad 3\cdot3\cdot5=\mathubar{45}, \NR
+\NC \text{négytényezős: } \NC 2\cdot3\cdot3\cdot5=\mathubar{90}. \NR
+\stopmathalignment \stopformula
+
+Tehát érdemes a számok építőköveivel közelebbről is megismerkedni.
+Próbáljuk felírni rendre a prímszámokat.
+Már tudjuk, hogy a legkisebb prímszám a 2, és innen kezdve a páros számokat nyugodtan át lehet ugrani, hiszen ezek mind oszthatók 2-vel.
+3 is, 5 is, 7 is prímszám; az ember szeretné rámondani, hogy a 9 is, de ez nem igaz, hiszen 9 osztható 3-mal.
+Most azt gondolnók, hogy innen kezdve ritkulnak a prímszámok; ez megint nem igaz, mert 11 és 13 is prímszám.
 
 
 \emptylines[1]\noindentation Hosszúhetény, 2018. május 5.

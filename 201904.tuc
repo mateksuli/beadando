@@ -109,7 +109,7 @@ utilitydata.structures.counters.collected={
   { 0 },
  },
  ["formula"]={
-  { 0, 0 },
+  { 0, 0, 0 },
  },
  ["graphic"]={
   { 0, 0 },
@@ -127,16 +127,16 @@ utilitydata.structures.counters.collected={
   { 0, 0 },
  },
  ["realpage"]={
-  { 2 },
+  { 6 },
  },
  ["subpage"]={
-  { 2 },
+  { 6 },
  },
  ["table"]={
   { 0, 0 },
  },
  ["userpage"]={
-  { 2 },
+  { 6 },
  },
 }
 
@@ -155,7 +155,7 @@ utilitydata.structures.lists.collected={
   },
   ["titledata"]={
    ["label"]="chapter",
-   ["title"]="Beadandó dolgozat",
+   ["title"]="Elolvasandó és beadandó",
   },
  },
  {
@@ -173,12 +173,40 @@ utilitydata.structures.lists.collected={
   },
  },
  {
+  ["metadata"]=7,
+  ["numberdata"]=9,
+  ["references"]={
+   ["block"]="bodypart",
+   ["internal"]=3,
+   ["realpage"]=4,
+   ["section"]=1,
+  },
+  ["titledata"]={
+   ["label"]="subsubsection",
+   ["title"]="Feladat I",
+  },
+ },
+ {
+  ["metadata"]=7,
+  ["numberdata"]=9,
+  ["references"]={
+   ["block"]="bodypart",
+   ["internal"]=4,
+   ["realpage"]=4,
+   ["section"]=1,
+  },
+  ["titledata"]={
+   ["label"]="subsubsection",
+   ["title"]="Feladat II",
+  },
+ },
+ {
   ["metadata"]=4,
   ["numberdata"]=6,
   ["references"]={
    ["block"]="bodypart",
-   ["internal"]=3,
-   ["realpage"]=2,
+   ["internal"]=5,
+   ["realpage"]=4,
    ["section"]=1,
   },
   ["titledata"]={
@@ -195,15 +223,43 @@ utilitydata.structures.pages.collected={
  {
   ["block"]="bodypart",
   ["number"]=1,
-  ["numberdata"]=7,
-  ["prefixdata"]=8,
+  ["numberdata"]=10,
+  ["prefixdata"]=11,
   ["state"]="start",
  },
  {
   ["block"]="bodypart",
   ["number"]=2,
-  ["numberdata"]=7,
-  ["prefixdata"]=8,
+  ["numberdata"]=10,
+  ["prefixdata"]=11,
+  ["state"]="start",
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=3,
+  ["numberdata"]=10,
+  ["prefixdata"]=11,
+  ["state"]="start",
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=4,
+  ["numberdata"]=10,
+  ["prefixdata"]=11,
+  ["state"]="start",
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=5,
+  ["numberdata"]=10,
+  ["prefixdata"]=11,
+  ["state"]="start",
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=6,
+  ["numberdata"]=10,
+  ["prefixdata"]=11,
   ["state"]="start",
  },
 }
@@ -302,6 +358,24 @@ utilitydata.job.packed={
    ["hidenumber"]=true,
    ["language"]="hu",
    ["numbers"]=5,
+   ["separatorset"]="default",
+   ["set"]="all",
+  },
+  {
+   ["catcodes"]=8,
+   ["coding"]="tex",
+   ["kind"]="section",
+   ["level"]=5,
+   ["name"]="feladat",
+   ["nolist"]=true,
+  },
+  { 0, 1, 0, 0, 0 },
+  {
+   ["block"]="bodypart",
+   ["conversionset"]="default",
+   ["hidenumber"]=true,
+   ["language"]="hu",
+   ["numbers"]=8,
    ["separatorset"]="default",
    ["set"]="all",
   },
