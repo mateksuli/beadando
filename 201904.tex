@@ -126,14 +126,14 @@ Mint minden edzés, először kellemetlen ez is.
 De ha nem adjátok fel, hamarosan beérik és meglepően szép gyümölcsöket fog teremni.
 E gyümölcsök leszakításáért persze aztán is meg kell majd dolgozni, de az már olyan lesz, mint egy kellemes tavaszi szüret.
 
-A dolgozatot külön lapon vagy lapokon, A4-es fénymásolópapíron kérem beadni.
-Szép munkákat várok.
-Azt javaslom először dolgozzatok külön munkalapra (ami lehet akár egy spirálfüzetből kitépett négyzetrácsos lap is), aztán ha végeztetek a feladattal, másoljátok szépen át a beadandó lapjára.
+A dolgozatot külön lapon vagy lapokon kérem beadni.
+Az egyed feladatok kidolgozásai és megoldásai jól azonosíthatók legyenek.
 Minden esetben tollal dolgozzatok!
-Ha valamit nem tudtatok megoldani, akkor adjátok be a hozzá tartozó munkalapot, hogy tudjam értékelni a próbálkozást, és lássam, hogy mi okozott gondot: ezt a következő órákon majd át tudjuk beszélni.
-A munkalapokon ki ne satírozzatok semmit, egy vagy két vonallal áthúzni viszont természetesen szabad bármit.
-Az elbírálás során a beadandó lap természetesen nagyobb súllyal bír, de ha a munkalapon látom, hogy volt valamiféle próbálkozás a feladat megoldására, akkor azt is fogom értékelni.
+A munkalapokon ki ne satírozzatok semmit, egy vagy két vonallal áthúzni viszont természetesen bármit szabad.
+Nem baj, ha akár oldalakon keresztül is nekiestek egy-egy feladat megoldásának, százszor is kihúzva a sikertelen próbálkozásokat; minden ilyen lapot adjatok be, a kitartó törekvést értékelni fogom, higyjétek el.
+Ha viszont egy ilyen összevisszaság közepén rábukkantok a helyes megoldásra, azt szép formában, elhatárolt területen emeljétek ki, akár annak az árán is, hogy még egyszer letisztult formában le kell írjátok az egész levezetést.
 
+Az értékelést egymáshoz képest kapjátok majd. A két legjobb eredmény 5-öst, a két legrosszabb 2-est fog érni. Az átlagon felüliek 4-est, az átlag alattiak 3-ast.
 
 \startsubject[title=Összeadás és kivonás]
 
@@ -256,17 +256,22 @@ $3762$\\
 Az $\mathbb{N}$ (természetes számok) számhalmazban a kivonást csak akkor végezhetjük el, ha a $\text{kisebbítendő}\geq\text{kivonandó}$ feltétel teljesül.
 
 \startfeladat[title=Feladat I]
-Végezd el az alábbi műveleteket:  
+Végezd el az alábbi műveleteket:\hfill40 pont
 
 {{feladatok1}}  
 \stopfeladat
 
 \startfeladat[title=Feladat II]
-Add össze a számokat 1-től 100-ig, az 1-el kezdve és a 100-al befejezve.
+Számítsd ki 1-től 100-ig a természetes számok összegét. \hfill20 pont
 \stopfeladat
 \blank
 
 Ez volt a kulimunka. Kellemetlen, de szükséges. Viszont észrevehettétek, hogy negatív számokkal most nem kellett bajlódnotok. Eljön az is majd, nem kell félni. Innentől érdekesebb feladatok jönnek.
+
+\startfeladat[title=Feladat III]
+Sorszámozd a magyar ábécé betűit ($\text{A}=1; \text{Á}=2;\dots$), majd számold ki a keresztneved összegét.\hfill10 pont
+\stopfeladat
+\blank
 
 \startsubject[title=Prímszámok, prímtényezőkre bontás]
 
@@ -353,12 +358,8 @@ ha pedig ezt a felbontást választjuk:
 \NC \NC 60\NC=2\cdot 30, \NR[+]
 \NC \text{akkor}\quad\NC 30\NC=5\cdot 6 \quad\NC\text{és itt}\quad \NC6\NC=2 \cdot 3, \quad\NC\text{tehát}\quad 30\NC=5 \cdot 2 \cdot 3, \NR[+]
 \NC \text{vagy}\quad\NC 30\NC=2\cdot 15 \quad\NC\text{és itt}\quad \NC15\NC=3 \cdot 5, \quad\NC\text{tehát}\quad 30\NC=2 \cdot 3 \cdot 5, \NR[+]
-\NC \text{vagy}\quad\NC 30\NC=3\cdot 10 \quad\NC\text{és itt}\quad \NC10\NC=2 \cdot 5, \quad\NC\text{tehát}\quad 30\NC=3 \cdot 2 \cdot 5, \NR[+]
+\NC \text{vagy}\quad\NC 30\NC=3\cdot 10 \quad\NC\text{és itt}\quad \NC10\NC=2 \cdot 5, \quad\NC\text{tehát}\quad 30\NC=3 \cdot 2 \cdot 5; \NR[+]
 \stopmathalignment \stopformula
-
-\startformula
-60=2 \cdot 30,
-\stopformula
 
 látjuk tehát, hogy 30 mindenképpen a 2, 3 és 5 prímszámok szorzatára bomlik; e szorzatot írva 30 helyébe
 
@@ -395,6 +396,56 @@ Próbáljuk felírni rendre a prímszámokat.
 Már tudjuk, hogy a legkisebb prímszám a 2, és innen kezdve a páros számokat nyugodtan át lehet ugrani, hiszen ezek mind oszthatók 2-vel.
 3 is, 5 is, 7 is prímszám; az ember szeretné rámondani, hogy a 9 is, de ez nem igaz, hiszen 9 osztható 3-mal.
 Most azt gondolnók, hogy innen kezdve ritkulnak a prímszámok; ez megint nem igaz, mert 11 és 13 is prímszám.
+
+Még a régi görögöktől maradt ránk egy szellemes ötlet, amely tévedés lehetősége nélkül, gépiesen állítja elő ezt a szeszélyes sorozatot: az ún{.} Eratosztenész-féle rosta.
+Írjuk fel a számokat 2-től 50-ig; e sorozat első tagja látatlanban is biztosan prímszám, hiszen minden valódi osztója kisebb volna nála s így (1-en kívül) előtte szerepelne a sorozatban, előtte azonban nincs semmi. Most nézzük meg, hogy mi ez az első szám: 2. Minden második szám 2-nek többszöröse és így 2 kivételével nem prímszám, tehát innen kezdve húzzunk ki minden második számot:
+
+
+% https://tex.stackexchange.com/a/129129/50554
+\defineframed
+    [bekarikazott]
+    [
+      corner=round,
+      location=low,
+      loffset=0.1em,
+      roffset=0.1em,
+      rulethickness=0.5mm,
+    ]
+
+
+\startuniqueMPgraphic{athuzott a}
+pickup pencircle scaled 0.5mm ;
+path p ; p := (0pt+3pt,0pt+3pt)--(\overlaywidth-3pt,\overlayheight-3pt) ;
+draw p withcolor black ;
+\stopuniqueMPgraphic
+\defineoverlay[athuzott][\uniqueMPgraphic{athuzott a}]
+
+\def\athuzott#1{\noindent\inframed[frame=off,background=athuzott,location=low]{#1} }
+
+\startformula
+\bekarikazott{2}, 3, \athuzott{4}, 5, \athuzott{6}, 7, \athuzott{8}, 9, \athuzott{10}, 11, \athuzott{12}
+\stopformula
+
+A legelső szám, ami 2 után épségben maradt, ismét csak prímszám lehet, hiszen csak előtte szereplő számnak lehetne többszöröse, előtte pedig csak olyan szám van, melynek többszöröseit kihúztuk.
+Nézzük meg ezt a számot: 3.
+Minden harmadik szám 3-nak többszöröse, tehát húzzunk ki innen kezdve minden harmadik számot (nem baj, hogy így egyes számokat kétszeresen is áthúzunk):
+
+\startformula
+\bekarikazott{2}, \bekarikazott{3}, \athuzott{4}, 5, \athuzott{6}, 7, \athuzott{8}, \athuzott{9}, \athuzott{10}, 11, \athuzott{12}
+\stopformula
+
+Ha 12-ig bezárólag vagyunk kíváncsiak a prímszámokra, akkor tovább már nem is kell mennünk, mert az első fennmaradó szám 5, és ennek a 3-szorosánál nagyobb többszörösei már túl vannak 12-n, kisebb többszörösei pedig már mind a kihúzott számok közt szerepelnek. 12-ig tehát a következő prímszámokat találtuk: $ 2, 3, 5, 7, 11$.
+
+\startfeladat[title=Feladat IV]
+Rostáld ki a prímszámokat legalább 200-ig. A lányok beadhatják a korábban tőlem kapott lapot, ami 4000-ig tartalmazza a számokat, ha azon eljutottak 200-ig.\hfill\hbox{40 pont}
+\stopfeladat
+\blank
+
+Gépet is lehetne szerkeszteni, mely az itt adott utasítást végrehajtja, és így hibátlanul ontja a prímszámokat egy bizonyos határig.
+Beszéltünk is róla, hogy ezzel a módszerrel keresik a prímszámokat a szuperszámítógépekkel.
+Ez azonban mit sem változtat azon, hogy a prímszámok minden határon túl a legszeszélyesebben bukkannak fel újra meg újra.
+
+Így például meg lehet mutatni, hogy bármilyen nagy réseket találhatunk köztük, ha elég messzire megyünk a számsorban. Például egy legalább 6 egységnyi rést, azaz hat egymást követő olyan számot, amelyek egyike sem prímszám, adnak a következő műveletek eredményei:
 
 
 \emptylines[1]\noindentation Hosszúhetény, 2018. május 5.

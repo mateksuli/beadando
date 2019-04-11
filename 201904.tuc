@@ -127,16 +127,16 @@ utilitydata.structures.counters.collected={
   { 0, 0 },
  },
  ["realpage"]={
-  { 6 },
+  { 7 },
  },
  ["subpage"]={
-  { 6 },
+  { 7 },
  },
  ["table"]={
   { 0, 0 },
  },
  ["userpage"]={
-  { 6 },
+  { 7 },
  },
 }
 
@@ -201,8 +201,8 @@ utilitydata.structures.lists.collected={
   },
  },
  {
-  ["metadata"]=4,
-  ["numberdata"]=6,
+  ["metadata"]=7,
+  ["numberdata"]=9,
   ["references"]={
    ["block"]="bodypart",
    ["internal"]=5,
@@ -210,8 +210,36 @@ utilitydata.structures.lists.collected={
    ["section"]=1,
   },
   ["titledata"]={
+   ["label"]="subsubsection",
+   ["title"]="Feladat III",
+  },
+ },
+ {
+  ["metadata"]=4,
+  ["numberdata"]=6,
+  ["references"]={
+   ["block"]="bodypart",
+   ["internal"]=6,
+   ["realpage"]=4,
+   ["section"]=1,
+  },
+  ["titledata"]={
    ["label"]="section",
    ["title"]="Prímszámok",
+  },
+ },
+ {
+  ["metadata"]=7,
+  ["numberdata"]=9,
+  ["references"]={
+   ["block"]="bodypart",
+   ["internal"]=7,
+   ["realpage"]=7,
+   ["section"]=1,
+  },
+  ["titledata"]={
+   ["label"]="subsubsection",
+   ["title"]="Feladat IV",
   },
  },
 }
@@ -258,6 +286,13 @@ utilitydata.structures.pages.collected={
  {
   ["block"]="bodypart",
   ["number"]=6,
+  ["numberdata"]=10,
+  ["prefixdata"]=11,
+  ["state"]="start",
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=7,
   ["numberdata"]=10,
   ["prefixdata"]=11,
   ["state"]="start",
