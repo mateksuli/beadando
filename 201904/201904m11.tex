@@ -1,0 +1,370 @@
+\startproject iras
+\mainlanguage[hu]
+\setupalign[
+  justified,
+  nothanging,
+  nohz,
+  hyphenated,
+  morehyphenated,
+  tolerant,
+]
+\setupinterlinespace[height=0.75,depth=0.25]
+\setuplayout[
+  grid=no,
+  location=middle,
+]
+\setupformulas[align=middle]
+%\setupmathalignment[grid=no]
+
+\def\PagenumberingCommand#1{\doifnot\pagenumber1{#1}}
+\setuppagenumbering[
+  location={footer,middle},
+  command=\PagenumberingCommand,
+]
+\setuppapersize[A4]
+\setuplayout[
+    backspace=30mm,
+    width=150mm,
+    topspace=30mm,
+    header=0mm,
+    footer=15mm,
+    footerdistance=0mm,
+    bottom=0mm,
+    bottomdistance=0mm,
+    height=247mm
+]
+
+% Betűkészlet
+%\setupbodyfont[libertinus,12pt]
+\setupbodyfont[12pt]
+
+% Vékony spácium bizonyos karakterek előtt (:;?!)
+\definecharacterspacing [magyarpunctuation]
+\setupcharacterspacing [magyarpunctuation] ["0021] [left=.1,alternative=1] % ! % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003A] [left=.1,alternative=1] % : % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003B] [left=.1,alternative=1] % ; % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003F] [left=.1,alternative=1] % ? % strip preceding space(char)
+
+% A magyar nyelv beállításai
+\startsetups[magyar]
+  % Vékony spácium bizonyos karakterek előtt (:;?!)
+  \setcharacterspacing[magyarpunctuation]
+  \setupindenting[%
+    yes,% A bekezdéseket behúzással kezdjük.
+    %next,% Az első bekezdés nincs behúzva.
+    2em% Közepes méretű (átmeneti megoldás: igazából a mérete 24 cicerós sorig 1 kvirt, nagyobbbnál 2 kvirt kellene legyen -> TENNIALÓ)
+  ]
+\stopsetups
+
+\setuplanguage[hu][%
+  setups=magyar,% Érvényesíti a fent megadott beállításokat.
+  spacing=packed% Frenchspacing (Gyurgyák 319. o.: egyenletes szóközök).
+                % http://wiki.contextgarden.net/French_spacing).
+]
+
+% TENNIVALÓ: csak magyar nyelvre
+% Idézetek (Gyurgyák, 86--87. o.).
+\definedelimitedtext[quote][location=text]
+\setupdelimitedtext[quote:1][
+  left={\lowerleftdoubleninequote},
+  right={\upperrightdoubleninequote},
+  spaceafter=0
+]
+\setupdelimitedtext[quote:2][
+  left={\rightguillemot\nobreak\hskip-.07em},
+  right={\kern-0.03em\leftguillemot},
+  spaceafter=0
+]
+\setupdelimitedtext[quote:3][
+  left={\upperleftsingleninequote},
+  right={\upperrightsingleninequote},
+  spaceafter=0
+]
+
+\definebodyfontenvironment[default][em=italic]
+
+\defineframedtext[kerdes][align=center,offset=0.5ex,style=italic,width=\dimexpr0.8\dimexpr\makeupwidth]
+
+\defineframedtext[kivonat][offset=0.5ex, frame=off,style=italic,width=\dimexpr0.8\dimexpr\makeupwidth]
+
+\definehead[cim][chapter]
+\setuphead[cim][number=no,align=middle,after={},]
+
+\define[2]\sectioncommand{\hbox{#1. #2}}
+\setuphead[section][
+  sectionsegments=section,
+  command=\sectioncommand,
+]
+
+\define[2]\feladatcommand{\hbox{Feladat #1 \enskip #2}}
+\definehead[feladat][subsection]
+\setuphead[feladat][
+    number=yes,
+    textdistance=0pt,
+    alternative=text,
+    style=bf,
+    commandafter={\enskip},
+    command=\feladatcommand,
+    sectionsegments=3:100,
+    indentnext=no,
+    beforesection={\setupindenting[no]},
+    aftersection={\setupindenting[yes]},
+]
+
+\define[1]\megoldascommand{\hbox{Megoldás #1}}
+\definehead[megoldas][subsubject]
+\setuphead[megoldas][
+    number=no,
+    textdistance=0pt,
+    alternative=text,
+    style=bf,
+    commandafter={\quad},
+    command=\megoldascommand,
+    sectionsegments=3:100,
+    indentnext=no,
+]
+
+\define[1]\rovidpontmegjegyzes{\setupinterlinespace[1ex]\framed[align=flushright,width=\textwidth,offset=0pt,frame=off]{\framed[location=middle,align={end},offset=0pt,width=0.618\textwidth,frame=off]{\small #1}}\setupinterlinespace[2.8ex]} % 0,618 az aranymetszés; muszáj volt a 2.8 ex-et beírni, reset és paraméter néllkül nem jó
+
+\define[1]\hosszupontmegjegyzes{\setupinterlinespace[1ex]\framed[align=flushright,width=\textwidth,offset=0pt,frame=off]{\framed[location=middle,align={normal},offset=0pt,width=0.618\textwidth,frame=off]{\small #1}}\setupinterlinespace[2.8ex]} % 0,618 az aranymetszés; muszáj volt a 2.8 ex-et beírni, reset és paraméter néllkül nem jó
+
+\define[1]\megjegyzes{\setupinterlinespace[1ex]\framed[location=middle,align={normal},width=\textwidth,frame=off,offset=0pt,toffset=1ex]{\small #1}\setupinterlinespace[2.8ex]}
+
+\definebar[mathubar][underbar]  % enélkül esetleg elcsúszik az aláhúzás
+
+%\showgrid[all]
+
+
+
+% https://tex.stackexchange.com/a/459615/50554
+\def\feladatpont#1{{\unskip\nobreak\hfil\penalty50
+  \hskip2em\hbox{}\nobreak\hfil #1\/ 
+  \parfillskip=0pt \finalhyphendemerits=0 \par}}
+
+\defineitemgroup[alfeladat]
+\setupitemgroup[alfeladat][each][right=),margin=2em,before={},inbetween={},after={},stopper=,style=italic]
+
+\startproduct iras
+
+\useURL[segedanyag][https://github.com/mateksuli/segedanyag]
+
+\startbodymatter
+
+\cim{Beadandó dolgozat megoldások}
+\startlinealignment[middle]
+ötödik osztály, 2019. április, {11/12}
+\stoplinealignment
+
+\blank[2*big]
+
+\startsection[title=Összeadás és kivonás]
+
+\startmegoldas[title=1.2] \feladatpont{$2\cdot5=10$ pont}
+
+\rovidpontmegjegyzes{Forrás: Imrecze et al{.}: {\em Fejtörő feladatok felsősöknek}\\(III.2.17)}
+
+\noindent 770 és 77.
+Ha a kisebbik szám $x$, akkor a nagyobb $10x$. Márpedig $x+10x=11x$, és így $11x=847$, amiből $x=77$.
+
+\megjegyzes{A feladat rendesen valószínűleg kevesebbet érne, de a cél a magasabb pontszámmal most az, hogy motiváljon arra, hogy foglalkozzanak vele, ami viszont előkészíti az egyenlettel való megoldás és így az egyenletek bemutatását.}
+\stopmegoldas
+
+\startmegoldas[title=1.3] \feladatpont{2 pont/db}
+
+\noindent {\starttabulate[|Mcw(\dimexpr0.5\textwidth-0.5em\relax)|Mcw(\dimexpr0.5\textwidth-0.5em\relax)|]
+ \NC 868467+74352=942819 \NC 20158+86927=107085\NR 
+ \NC 3310+32615=35925 \NC 10844+1852=12696\NR 
+ \NC 10450+96798=107248 \NC 8151+697103=705254\NR 
+ \NC 64577+12946=77523 \NC 2531+34591=37122\NR 
+ \NC 806824+8386=815210 \NC 95541+3490=99031\NR 
+ \NC 950563-7747=942816 \NC 42140-13424=28716\NR 
+ \NC 97233-91589=5644 \NC 292894-18706=274188\NR 
+ \NC 658766-8400=650366 \NC 51454-4837=46617\NR 
+ \NC 13696-8438=5258 \NC 40981-7878=33103\NR 
+ \NC 807271-359563=447708 \NC 967315-5341=961974\NR 
+\stoptabulate
+}  
+\stopmegoldas
+
+\startmegoldas[title=1.4] \feladatpont{2 pont/db}
+
+\noindent {\starttabulate[|Mcw(\dimexpr0.5\textwidth-0.5em\relax)|Mcw(\dimexpr0.5\textwidth-0.5em\relax)|]
+ \NC (-98)-96+(-12)=-206 \NC (-77)+51+86=60\NR 
+ \NC 11+33+0=44 \NC 177-(-167)+(-84)=260\NR 
+ \NC (-800)+295+592=87 \NC 8+(-40)-14=-46\NR 
+ \NC 5+(-39)-7=-41 \NC 30+54+(-36)=48\NR 
+ \NC 469+(-45)-42=382 \NC (-86)+(-366)+50=-402\NR 
+\stoptabulate
+}  
+\stopmegoldas
+
+\startmegoldas[title=1.5] \feladatpont{$5\cdot2=10$ pont}
+
+\rovidpontmegjegyzes{Forrás: Imrecze et al{.}: {\em Fejtörő feladatok felsősöknek}\\(III.2.9)}
+
+\noindent Mivel:
+\startformula \startmathalignment[n=5,align={left,middle,left,middle,left}]
+\NC \text{\bf B}+\text{\bf B}<19\text{,}\quad\NC\text{azért}\NC\quad\text{\bf A}=1\text{;} \NR
+\NC \text{\bf E}+\text{\bf E}=\text{\bf E}\text{,}\quad\NC\text{azért}\NC\quad\text{\bf E}=0\text{;} \NR
+\NC \text{\bf E}=0\text{,}\quad\NC\text{azért}\NC\quad\text{\bf B}+\text{\bf B}=10\quad\NC\text{és}\NC\quad\text{\bf B}=5\text{;} \NR
+\NC \text{\bf C}+\text{\bf A}=5\text{,}\quad\NC\text{azért}\NC\quad\text{\bf C}=4\text{;} \NR
+\NC \text{\bf C}=4\text{,}\quad\NC\text{azért}\NC\quad\text{\bf D}+\text{\bf D}=4\quad\NC\text{és}\NC\quad\text{\bf D}=2\text{.} \NR
+\stopmathalignment \stopformula
+Az összeadás tehát:
+\startformula
+{\framed[frame=off,align={flushright,nothyphenated,verytolerant},before={},after={}]{
+$5240$\\
+\underbar{$+5210$}\\
+$10450$\\
+}}
+\stopformula
+\stopmegoldas
+
+\startmegoldas[title=1.6] \feladatpont{20 pont}
+
+\noindent A megoldás 5050.
+Egy Gaussról szóló híres történet, amely a szájhagyomány útján átalakult, arról szól, hogy Gauss általános iskolai tanára, J{.} G{.} Büttner diákjait azzal akarta lefoglalni, hogy 1-től 100-ig adják össze az egész számokat.
+A fiatal Gauss mindenki megdöbbenésére másodpercek alatt előrukkolt a helyes megoldással, megvillantva matematikai éleselméjűségét: a számsor alá visszafele leírta a számokat, majd az oszlopokat összeadta, így azonos összegeket kapott:
+\startformula
+1 + 100 = 2 + 99 = 3 + 98 = \dots = 50 + 51= 101.
+\stopformula
+Ez összesen 50 darab számpárt jelentett, és így $50\cdot101=5050$.
+
+\megjegyzes{A 20 pont a fáradságos munkát vagy a találékonyságot hivatott díjazni, valamint motivál a feladat elvégzésére és ezzel megágyaz a fenti történet és egyúttal a számtani sorok bemutatásának.}
+\stopmegoldas
+
+\startmegoldas[title=1.7] \feladatpont{10 pont}
+
+\noindent $\text{A}=1$, 
+$\text{Á}=2$, 
+$\text{B}=3$, 
+$\text{C}=4$, 
+$\text{Cs}=5$, 
+$\text{D}=6$, 
+$\text{Dz}=7$, 
+$\text{Dzs}=8$, 
+$\text{E}=9$, 
+$\text{É}=10$, 
+$\text{F}=11$, 
+$\text{G}=12$, 
+$\text{Gy}=13$, 
+$\text{H}=14$, 
+$\text{I}=15$, 
+$\text{Í}=16$, 
+$\text{J}=17$, 
+$\text{K}=18$, 
+$\text{L}=19$, 
+$\text{Ly}=20$, 
+$\text{M}=21$, 
+$\text{N}=22$, 
+$\text{Ny}=23$, 
+$\text{O}=24$, 
+$\text{Ó}=25$, 
+$\text{Ö}=26$, 
+$\text{Ő}=27$, 
+$\text{P}=28$, 
+$\text{Q}=29$, 
+$\text{R}=30$, 
+$\text{S}=31$, 
+$\text{Sz}=32$, 
+$\text{T}=33$, 
+$\text{Ty}=34$, 
+$\text{U}=35$, 
+$\text{Ú}=36$, 
+$\text{Ü}=37$, 
+$\text{Ű}=38$, 
+$\text{V}=39$, 
+$\text{W}=40$, 
+$\text{X}=41$, 
+$\text{Y}=42$, 
+$\text{Z}=43$, 
+$\text{Zs}=44$.
+
+\megjegyzes{A feladat burkoltan az is, hogy megtanuljuk, hogy mi a különbség a 40 betűs magyar ábécé és a 44 betűs kiterjesztett magyar ábécé, ami tartalmazza a Q, W, X, Y betűket is. Az interneten a ,,magyar ábécé'' keresőszó segítségével nyerhet az ember felvilágosítást erről. Emmellet a adatok kódolásába is bevezet.}
+\stopmegoldas
+
+
+
+\startsection[title=Prímszámok, prímtényezőkre bontás]
+
+\startmegoldas[title=2.2] \feladatpont{$4+4=8$ pont}
+\rovidpontmegjegyzes{Forrás: Imrecze et al{.}: {\em Fejtörő feladatok felsősöknek}\\(III.1.10)}
+
+Sárinak igaza volt és a kockák felső lapján 3, 3, és 5 vagy 5, 5 és 3 pötty lehetett.
+
+A három kockával legfeljebb $3\cdot6=18$-at lehet dobni. Ennél kisebb, de 10-nél nagyobb törzsszámok: 11 és 13. A 11 három törzsszám összegeként csak mint $3+3+5$ kapható, a 13 pedig mint $5+5+3$. Más megoldás nincs.
+\stopmegoldas
+
+\startmegoldas[title=2.3] \feladatpont{20 pont}
+
+\noindent {\starttabulate[|Mcw(\dimexpr0.166\textwidth-0.8300000000000001em\relax)|Mcw(\dimexpr0.167\textwidth-0.8350000000000001em\relax)|Mcw(\dimexpr0.167\textwidth-0.8350000000000001em\relax)|Mcw(\dimexpr0.167\textwidth-0.8350000000000001em\relax)|Mcw(\dimexpr0.167\textwidth-0.8350000000000001em\relax)|Mcw(\dimexpr0.166\textwidth-0.8300000000000001em\relax)|]
+ \NC 2 \NC 3 \NC 5 \NC 7 \NC 11 \NC 13\NR 
+ \NC 17 \NC 19 \NC 23 \NC 29 \NC 31 \NC 37\NR 
+ \NC 41 \NC 43 \NC 47 \NC 53 \NC 59 \NC 61\NR 
+ \NC 67 \NC 71 \NC 73 \NC 79 \NC 83 \NC 89\NR 
+ \NC 97 \NC 101 \NC 103 \NC 107 \NC 109 \NC 113\NR 
+ \NC 127 \NC 131 \NC 137 \NC 139 \NC 149 \NC 151\NR 
+ \NC 157 \NC 163 \NC 167 \NC 173 \NC 179 \NC 181\NR 
+ \NC 191 \NC 193 \NC 197 \NC 199\NR 
+\stoptabulate
+}
+\stopmegoldas
+
+\startmegoldas[title=2.4] \feladatpont{12 pont}
+\rovidpontmegjegyzes{Forrás: Imrecze et al{.}: {\em Fejtörő feladatok felsősöknek}\\(III.1.5)}
+
+\noindent Az ötjegyű szám: 23572.
+Az egyjegyű törzsszámok: 2, 3, 5, 7 összege 17, és ha közülük a 2-t adjuk a 17-hez, csak akkor jutunk törzsszámhoz.
+Az {\bf MA} csak 23 lehet, mert sem 25, sem 27 nem prímszám. Tehát $\text{\bf M}=2$, $\text{\bf A}=3$.
+Az {\bf MLO} vagy 257 vagy 275 lehetne, de 275 nem törzsszám, ezért $\text{\bf L}=5$, $\text{\bf O}=7$. 
+\stopmegoldas
+
+
+\startmegoldas[title=2.5] \feladatpont{2 pont/db}
+
+\noindent {\starttabulate[|Mcw(\dimexpr0.5\textwidth-0.5em\relax)|Mcw(\dimexpr0.5\textwidth-0.5em\relax)|]
+ \NC 120=2^3\cdot3\cdot5 \NC 48=2^4\cdot3\NR 
+ \NC 12=2^2\cdot3 \NC 10010=2\cdot5\cdot7\cdot11\cdot13\NR 
+ \NC 1320=2^3\cdot3\cdot5\cdot11 \NC 36=2^2\cdot3^2\NR 
+ \NC 240=2^4\cdot3\cdot5 \NC 28200=2^3\cdot3\cdot5^2\cdot47\NR 
+ \NC 1120=2^5\cdot5\cdot7 \NC 176=2^4\cdot11\NR 
+ \NC 74100=2^2\cdot3\cdot5^2\cdot13\cdot19 \NC 8=2^3\NR 
+ \NC 364=2^2\cdot7\cdot13 \NC 5698=2\cdot7\cdot11\cdot37\NR 
+ \NC 18=2\cdot3^2 \NC 224=2^5\cdot7\NR 
+ \NC 1496=2^3\cdot11\cdot17 \NC 112=2^4\cdot7\NR 
+ \NC 56=2^3\cdot7 \NC 1104=2^4\cdot3\cdot23\NR 
+\stoptabulate
+}  
+\stopmegoldas
+
+
+\startmegoldas[title=2.6]
+
+\rovidpontmegjegyzes{Forrás: Imrecze et al{.}: {\em Fejtörő feladatok felsősöknek}\\(III.1.27)}
+
+\noindent Egy kész törzszsámtáblázat segítségével (lásd Feladat 2.3) könnyen megoldhatjuk a feladatot -- azonban e nélkül is célhoz érhetünk.
+
+Az {\it a)} kérdésre a választ megtaláljuk a {\em Prímszámok} segédanyag {\em Eratosztenész szitája} című fejezetében. De a következőképpen is gondolkodhatunk: jelöljük $n$-nel a $2\cdot3\cdot5\cdot7\cdot11$ számot, ekkor az $n+2$, $n+3$, $n+4$, \dots, $n+11$ tíz egymást követő szám között nincs prímszám, hiszen mindegyiknek van 1-nél nagyobb és nála kisebb osztója, mert mindegyik osztható a 2, 3, 5, 7, 11 törzsszámok valamelyikével. A prímszámtáblázatból azt olvashatjuk ki, hogy először a 114-gyel kezdődő 10 (13) egymást követő szám között nem találunk prímet.
+\feladatpont{3 pont}
+\startalfeladat[a][start=2]
+\item Például: $48, 49, 50, 51, 52, \mathubar{53}, 54, 55, 56, 57$;
+\feladatpont{3 pont}
+\item Például: $\mathubar{19}, 20, 21, 22, \mathubar{23}, 24, 25, 26, 57, 28$;
+\feladatpont{3 pont}
+\item Például: $\mathubar{7}, 8, 9, 10, \mathubar{11}, 12, \mathubar{13}, 14, 15, 16$;
+\feladatpont{3 pont}
+\item Például: $\mathubar{3}, 4, \mathubar{5}, 6, \mathubar{7}, 8, 9, 10, \mathubar{11}, 12$.
+\feladatpont{3 pont}
+\stopalfeladat
+
+\noindent Öt prímszám is előfordulhat tíz egymást követő szám között: $\mathubar{2}, \mathubar{3}, 4, \mathubar{5}, 6, \mathubar{7}, 8, 9, 10, \mathubar{11}$, de ennél több nem, hiszen a 2-nél nagyobb páros számok nem törzsszámok és tíz egymást követő szám között öt páros van.
+\feladatpont{3 pont}
+\stopmegoldas
+
+\emptylines[1]\noindentation Hosszúhetény, 2019{.} április 14.
+
+\stopsubject
+
+\stopbodymatter
+\stopproduct
+\stopproject
