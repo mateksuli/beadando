@@ -1,0 +1,329 @@
+\startproject iras
+\mainlanguage[hu]
+\setupalign[
+  justified,
+  nothanging,
+  nohz,
+  hyphenated,
+  morehyphenated,
+  tolerant,
+]
+\setupinterlinespace[height=0.75,depth=0.25]
+\setuplayout[
+  grid=no,
+  location=middle,
+]
+\setupformulas[align=middle]
+%\setupmathalignment[grid=no]
+
+\def\PagenumberingCommand#1{\doifnot\pagenumber1{#1}}
+\setuppagenumbering[
+  location={footer,middle},
+  command=\PagenumberingCommand,
+]
+\setuppapersize[A4]
+\setuplayout[
+    backspace=30mm,
+    width=150mm,
+    topspace=30mm,
+    header=0mm,
+    footer=15mm,
+    footerdistance=0mm,
+    bottom=0mm,
+    bottomdistance=0mm,
+    height=247mm
+]
+
+% Betűkészlet
+%\setupbodyfont[libertinus,12pt]
+\setupbodyfont[12pt]
+
+% Vékony spácium bizonyos karakterek előtt (:;?!)
+\definecharacterspacing [magyarpunctuation]
+\setupcharacterspacing [magyarpunctuation] ["0021] [left=.1,alternative=1] % ! % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003A] [left=.1,alternative=1] % : % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003B] [left=.1,alternative=1] % ; % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003F] [left=.1,alternative=1] % ? % strip preceding space(char)
+
+% A magyar nyelv beállításai
+\startsetups[magyar]
+  % Vékony spácium bizonyos karakterek előtt (:;?!)
+  \setcharacterspacing[magyarpunctuation]
+  \setupindenting[%
+    yes,% A bekezdéseket behúzással kezdjük.
+    %next,% Az első bekezdés nincs behúzva.
+    2em% Közepes méretű (átmeneti megoldás: igazából a mérete 24 cicerós sorig 1 kvirt, nagyobbbnál 2 kvirt kellene legyen -> TENNIALÓ)
+  ]
+\stopsetups
+
+\setuplanguage[hu][%
+  setups=magyar,% Érvényesíti a fent megadott beállításokat.
+  spacing=packed% Frenchspacing (Gyurgyák 319. o.: egyenletes szóközök).
+                % http://wiki.contextgarden.net/French_spacing).
+]
+
+% TENNIVALÓ: csak magyar nyelvre
+% Idézetek (Gyurgyák, 86--87. o.).
+\definedelimitedtext[quote][location=text]
+\setupdelimitedtext[quote:1][
+  left={\lowerleftdoubleninequote},
+  right={\upperrightdoubleninequote},
+  spaceafter=0
+]
+\setupdelimitedtext[quote:2][
+  left={\rightguillemot\nobreak\hskip-.07em},
+  right={\kern-0.03em\leftguillemot},
+  spaceafter=0
+]
+\setupdelimitedtext[quote:3][
+  left={\upperleftsingleninequote},
+  right={\upperrightsingleninequote},
+  spaceafter=0
+]
+
+\definebodyfontenvironment[default][em=italic]
+
+\defineframedtext[kerdes][align=center,offset=0.5ex,style=italic,width=\dimexpr0.8\dimexpr\makeupwidth]
+
+\defineframedtext[kivonat][offset=0.5ex, frame=off,style=italic,width=\dimexpr0.8\dimexpr\makeupwidth]
+
+\definehead[cim][chapter]
+\setuphead[cim][number=no,align=middle,after={},]
+
+\define[2]\sectioncommand{\hbox{#1. #2}}
+\setuphead[section][
+  sectionsegments=section,
+  command=\sectioncommand,
+]
+
+\define[2]\feladatcommand{\hbox{Feladat #1 \enskip #2}}
+\definehead[feladat][subsection]
+\setuphead[feladat][
+    number=yes,
+    textdistance=0pt,
+    alternative=text,
+    style=bf,
+    commandafter={\enskip},
+    command=\feladatcommand,
+    sectionsegments=3:100,
+    indentnext=no,
+    beforesection={\setupindenting[no]},
+    aftersection={\setupindenting[yes]},
+]
+
+\definebar[mathubar][underbar]  % enélkül esetleg elcsúszik az aláhúzás
+
+%\showgrid[all]
+
+
+
+% https://tex.stackexchange.com/a/459615/50554
+\def\feladatpont#1{{\unskip\nobreak\hfil\penalty50
+  \hskip2em\hbox{}\nobreak\hfil #1\/ 
+  \parfillskip=0pt \finalhyphendemerits=0 \par}}
+
+\defineitemgroup[alfeladat]
+\setupitemgroup[alfeladat][each][right=),margin=1em,before={},inbetween={},after={},stopper=,style=italic]
+
+\startproduct iras
+
+\useURL[segedanyag][https://github.com/matektankor/segedanyag]
+
+\startbodymatter
+
+\cim{Beadandó dolgozat feladatok}
+\startlinealignment[middle]
+ötödik osztály, 2019. május, 8/10
+\stoplinealignment
+
+\blank[2*big]
+
+\noindentation Kedves tanulók! 
+\blank
+\noindentation Úgy érzem sikerült megtalálni a közös utat, ami az órák tartalmi részét illeti.
+A száraz és szigorú matematikai logika végigjárása helyett a játékos vonalon haladunk, és úgy érzem, hogy ezzel többet tanultatok, több matematikai tudás ragadt meg, mint korábban.
+
+A legutóbbi beadandó dolgozaton rendkívül sokat dolgoztam.
+Sajnos erre most nem volt lehetőségem, ráadásul nem adhatok két hetet a beadásra sem, mert szorít minket az év vége.
+Ezért ez alkalommal a készségfejlesztés lesz az elsődleges cél, ami egy egyszerűbb, de sajnos kevésbé izgalmas feladatsort fog eredményezni.
+
+A könnyedebb órák ellenére is meg kell tanulni a matematikai módszereket és összefüggéseket.
+Ezeken az órákon is bemutattam és kipróbáltunk számos ilyen módszert.
+Nem kérek olyasmit tehát, amit nem láttatok, és amit nem próbáltunk ki.
+
+Mindenki kapott segédlapot a mértékegységek átváltásához.
+Aki viszont elhagyta, itt tudja pótolni:
+
+\framed[frame=off,align=middle,width=\textwidth,offset=4pt]{
+\framed[location=middle,offset=4pt]{\url[segedanyag]}
+}
+
+Arra kérlek titeket, hogy először mindenképpen dolgozzatok egyedül, és a szüleiteket vagy más felnőtteket csak akkor vonjatok be a feladatok megoldásába, ha feltétlenül szükséges, és csak annyi ideig, amíg meg nem értitek azt amit egyedül nem sikerült.
+Ez a feladat nektek van kiadva.
+Többet is tanultok belőle, ha egyedül jöttök rá valamire.
+
+
+\startsection[title=Természetes törtek]
+
+A természetes törtek teljes megértéséig még nem jutottatok el.
+Nem kell aggódni, voltam a hatodikasoknál, és ők sem értik még ezeket teljesen.
+Igazából még nem nagyon találkoztam olyannal, aki nyolcadikos koráig eljutott volna oda, hogy teljes könnyedséggel kezelje ezeket, és ismerje az átjárást a természetes és a tizedes törtek, valamint a százalékos alak között.
+Habár ezek ismerete év végére már szükséges volna, nem léphetünk túl nagyot, ezért a következő feladatok nem lesznek túl bonyolultak.
+
+A természetes törtek esetén meg kell szokni, hogy nem a felső, hanem az alsó számra (a nevezőre) tekintünk először, ugyanis az mondja meg, hogy mennyibe tört dolgokkal van dolgunk.
+Ha a nevező 2, akkor fél részeink vannak, ha 4, akkor negyed részeink, és ha 118, akkor száztizennyolcad részeink.
+Minden rész ugyanolyan mint a többi, és együtt 118-an adnak egy egészt, 236-an pedig két egészt.
+Ha viszont csak 59 ilyenünk van, akkor csak fél egészünk van.
+Azt, hogy mennyi van ezekből az azonos darabkákból, a felső szám (a számláló) mondja meg. Az utolsó esetben, amikor 59 darab 118-ad részünk volt, a számláló tehát 59, a tört pedig $\displaystyle{\fraction{59}{118}}$.
+
+Miért egy fél egész az $\displaystyle{\fraction{59}{118}}$?
+Ha a számlálónak és a nevezőnek van közös osztója\footnote{ennek kiderítésére alkalmas a prímtényezős felbontás}, akkor e közös osztóval eloszthatjuk külön-külön a számlálót is és a nevezőt is, és a kapott tört értéke nem változik, azaz továbbra is ugyanazt a dolgot fogja jelenteni, mint az egyszerűsítés előtt.
+E műveletet ugyanis egyszerűsítésnek hívjuk.
+Vegyük észre, hogy az $\displaystyle{\fraction{59}{118}}$ számlálója is és nevezője is maradék nélkül osztható 59-cel.
+Az egyszerűsítés után tehát az $\displaystyle{\fraction{1}{2}}$ törtet kapjuk, ami egy fél egész.
+
+A szmlálót és a nevezőt meg is szorozhatjuk ugyanazzal a számmal, természetesen akkor sem változik a tört értéke.
+$\displaystyle{\fraction{1}{2}}$ és $\displaystyle{\fraction{2}{4}}$ tehát ugyanannyi, ahogy $\displaystyle{\fraction{59}{118}}$ is, amikor az $\displaystyle{\fraction{1}{2}}$-et 59-cel bővítjük.
+Ez utóbbi művelet neve ugyanis a bővítés.
+
+Ha két tört nevezője azonos, akkor az összeadás és kivonás könnyű velük: csak a számlálókat kell összeadni vagy kivonni.
+\startformula \startmathalignment[n=1]
+\NC {\fraction{1}{2}}+{\fraction{1}{2}}={\fraction{2}{2}}={\fraction{1}{1}}=1 \NR[+]
+\NC {\fraction{1}{2}}+{\fraction{5}{2}}=3 \NR[+]
+\NC {\fraction{70}{118}}-{\fraction{11}{118}}={\fraction{59}{118}}={\fraction{1}{2}} \NR[+]
+\stopmathalignment \stopformula
+
+Ha viszont a két törtnek nem azonos a nevezője, akkor nem tudjuk azonnal elvégezni az összeadást vagy a kivonást, előbb valamiféleképpen közös nevezőre kell hozni őket.
+Úgy kell tehát egyszerűsítenünk vagy bővítenünk egyiket, másikat, vagy mindkettőt, hogy a két tört nevezője azonos legyen.
+Ha például a feladat a következő kiszámítása, akkor a számlálókkal nem végezhetjük el a kivonást, mert a nevezők különböznek:
+\startformula \startmathalignment[n=1]
+\NC {\fraction{3}{2}}-{\fraction{59}{118}} \NR[+]
+\stopmathalignment \stopformula
+Ha viszont az $\displaystyle{\fraction{59}{118}}$-at egyszerűsítjük $\displaystyle{\fraction{1}{2}}$ formába, akkor máris láthatjuk, hogy
+\startformula \startmathalignment[n=1]
+\NC {\fraction{3}{2}}-{\fraction{1}{2}}={\fraction{2}{2}}=1. \NR[+]
+\stopmathalignment \stopformula
+Természetesen bővíthettük volna a $\displaystyle{\fraction{3}{2}}$-et is 59-cel, azaz megszorozzuk a számlálót és a nevezőt is 59-cel.
+Ezzel a nevező 118 lesz, a számláló pedig $3\cdot59=177$.
+Így
+\startformula \startmathalignment[n=1]
+\NC {\fraction{177}{118}}-{\fraction{59}{118}}={\fraction{118}{118}}=1. \NR[+]
+\stopmathalignment \stopformula
+
+Muszáj volt ide sürítenem az elméletet, mert a külön segédanyagokat nagyon kevesen olvastátok el.
+
+\startfeladat
+Ha eddig nem tetted, olvasd el a fenti szöveget a természetes törtekről, és foglald össze legalább 30 szóval.\feladatpont{10 pont}
+
+Volt valami, amit nem értettél belőle? Ha igen, írd le legalább 20 szóval.\feladatpont{5 pont}
+\stopfeladat
+
+\startfeladat
+Mennyi egészt írnak le a következő tört alakok:\feladatpont{2 pont/db}
+
+{\starttabulate[|Mcw(\dimexpr0.25\textwidth-0.75em\relax)|Mcw(\dimexpr0.25\textwidth-0.75em\relax)|Mcw(\dimexpr0.25\textwidth-0.75em\relax)|Mcw(\dimexpr0.25\textwidth-0.75em\relax)|][distance=big]
+ \NC {\fraction{3}{3}} \NC {\fraction{14}{7}} \NC {\fraction{12345}{12345}} \NC {\fraction{10}{1}}\NR \TB[line]
+ \NC {\fraction{400}{2}} \NC {\fraction{1}{1}} \NC {\fraction{125}{5}} \NC {\fraction{500}{100}}\NR \TB[line]
+ \NC {\fraction{99}{9}} \NC {\fraction{990}{9}} \NC {\fraction{999}{9}} \NC {\fraction{1008}{9}}\NR \TB[line]
+\stoptabulate
+}  
+\stopfeladat
+
+\startfeladat
+Egyszerűsítsd a következő törteket:\feladatpont{2 pont/db}
+
+{\starttabulate[|Mcw(\dimexpr0.25\textwidth-0.75em\relax)|Mcw(\dimexpr0.25\textwidth-0.75em\relax)|Mcw(\dimexpr0.25\textwidth-0.75em\relax)|Mcw(\dimexpr0.25\textwidth-0.75em\relax)|]
+  \NC {\fraction{633}{422}} \NC {\fraction{6251}{8037}} \NC {\fraction{3784}{3311}} \NC {\fraction{4}{16}}\NR \TB[line]
+ \NC {\fraction{3}{9}} \NC {\fraction{42}{35}} \NC {\fraction{267}{801}} \NC {\fraction{54}{36}}\NR \TB[line]
+ \NC {\fraction{6454}{3688}} \NC {\fraction{5712}{7616}} \NC {\fraction{8}{8}} \NC {\fraction{16}{32}}\NR \TB[line]
+
+\stoptabulate
+}  
+\stopfeladat
+
+\startfeladat
+Bővítsd a törteket a 2-től 10-ig terjedő természetes számokkal. Minden számot csak egyszer használhatsz, de te döntheted el, hogy melyik törtet bővíted 2-vel, melyiket 3-mal, melyiket 4-gyel és így tovább:\feladatpont{2 pont/db}
+
+{\starttabulate[|Mcw(\dimexpr0.33\textwidth-0.67em\relax)|Mcw(\dimexpr0.34\textwidth-0.66em\relax)|Mcw(\dimexpr0.33\textwidth-0.67em\relax)|]
+  \NC {\fraction{63}{66}} \NC {\fraction{307}{5}} \NC {\fraction{10}{1}}\NR \TB[line]
+ \NC {\fraction{252}{57}} \NC {\fraction{3}{5}} \NC {\fraction{37}{8}}\NR \TB[line]
+ \NC {\fraction{99}{3}} \NC {\fraction{80}{8}} \NC {\fraction{85}{77}}\NR \TB[line]
+
+\stoptabulate
+}  
+\stopfeladat
+
+\startfeladat
+Végezd el az alábbi műveleteket:\feladatpont{2 pont/db}
+
+{\starttabulate[|Mcw(\dimexpr0.33\textwidth-0.67em\relax)|Mcw(\dimexpr0.34\textwidth-0.66em\relax)|Mcw(\dimexpr0.33\textwidth-0.67em\relax)|]
+%{\starttabulate[|Mcw(\dimexpr0.5\textwidth-0.5em\relax)|Mcw(\dimexpr0.5\textwidth-0.5em\relax)|]
+  \NC {\fraction{96}{90}}-{\fraction{9}{90}} \NC {\fraction{1}{78}}+{\fraction{747}{78}} \NC {\fraction{33}{31}}-{\fraction{2}{31}}\NR \TB[line]
+ \NC {\fraction{3}{44}}+{\fraction{620}{44}} \NC {\fraction{4}{1}}+{\fraction{1}{1}} \NC {\fraction{526}{9}}-{\fraction{2}{9}}\NR \TB[line]
+ \NC {\fraction{1}{41}}+{\fraction{0}{41}} \NC {\fraction{53}{88}}-{\fraction{7}{88}} \NC {\fraction{53}{86}}-{\fraction{2}{86}}\NR \TB[line]
+ \NC {\fraction{860}{6}}-{\fraction{44}{6}} \NC {\fraction{88}{50}}-{\fraction{13}{50}} \NC {\fraction{9}{56}}+{\fraction{58}{56}}\NR \TB[line]
+
+\stoptabulate
+}  
+\stopfeladat
+
+\startfeladat
+Végezd el az alábbi műveleteket:\feladatpont{4 pont/db}
+
+{\starttabulate[|Mcw(\dimexpr0.33\textwidth-0.67em\relax)|Mcw(\dimexpr0.34\textwidth-0.66em\relax)|Mcw(\dimexpr0.33\textwidth-0.67em\relax)|]
+%{\starttabulate[|Mcw(\dimexpr0.5\textwidth-0.5em\relax)|Mcw(\dimexpr0.5\textwidth-0.5em\relax)|]
+  \NC {\fraction{15}{4}}-{\fraction{49}{389}} \NC {\fraction{613}{2}}+{\fraction{993}{709}} \NC {\fraction{908}{9}}+{\fraction{6}{571}}\NR \TB[line]
+ \NC {\fraction{32}{38}}+{\fraction{80}{38}} \NC {\fraction{666}{4}}+{\fraction{7}{3}} \NC {\fraction{9}{7}}-{\fraction{95}{927}}\NR \TB[line]
+ \NC {\fraction{9}{88}}+{\fraction{3}{9}} \NC {\fraction{0}{20}}+{\fraction{182}{56}} \NC {\fraction{9}{67}}+{\fraction{757}{51}}\NR \TB[line]
+ \NC {\fraction{31}{6}}+{\fraction{0}{4}} \NC {\fraction{1}{572}}+{\fraction{331}{706}} \NC {\fraction{2}{12}}-{\fraction{5}{439}}\NR \TB[line]
+
+\stoptabulate
+}  
+\stopfeladat
+
+
+\startsection[title=Mértékek, mértékegységek és átváltásuk]
+
+\startfeladat
+Fejezd ki az alapegységben és jelezd, hogy milyen mértékről van szó:\feladatpont{$2+1$ pont/db}
+
+{\starttabulate[|cw(\dimexpr0.33\textwidth-0.67em\relax)|cw(\dimexpr0.34\textwidth-0.66em\relax)|cw(\dimexpr0.33\textwidth-0.67em\relax)|]
+  \NC 27100\,dm \NC 4\,km \NC 446\,m\NR 
+ \NC 59900\,cm \NC 831000\,l \NC 2\,d\NR 
+ \NC 7\,t \NC 2\,m\high{3} \NC 7940\,kg\NR 
+ \NC 7058000000\,mg \NC 0\,ha \NC 7\,m\high{2}\NR 
+ \NC 1\,s \NC 22\,h \NC 822000\,mm\NR 
+ \NC 108\,min \NC 259000\,g \NC 41\,dkg\NR 
+
+\stoptabulate
+}  
+\stopfeladat
+
+\startfeladat
+Fejezd ki a megadott egységban és jelezd, hogy milyen mértékről van szó:\feladatpont{$4+1$ pont/db}
+
+{\starttabulate[|Mcw(0.5\textwidth)||Mcw(0.5\textwidth)|][unit=0pt]
+  \NC \text{52\,s} = \text{\dots\,d} \NC \text{1210\,ha} = \text{\dots\,km\high{2}}\NR 
+ \NC \text{134\,mg} = \text{\dots\,t} \NC \text{47\,min} = \text{\dots\,h}\NR 
+ \NC \text{33\,mm\high{2}} = \text{\dots\,m\high{2}} \NC \text{5202\,cm\high{2}} = \text{\dots\,ha}\NR 
+ \NC \text{82\,cm} = \text{\dots\,m} \NC \text{339\,dl} = \text{\dots\,m\high{3}}\NR 
+ \NC \text{198\,dm} = \text{\dots\,km} \NC \text{756\,kg} = \text{\dots\,t}\NR 
+ \NC \text{52\,g} = \text{\dots\,dkg} \NC \text{3191\,l} = \text{\dots\,km\high{3}}\NR 
+ \NC \text{6238\,m\high{2}} = \text{\dots\,ha} \NC \text{5235\,dm\high{2}} = \text{\dots\,km\high{2}}\NR 
+ \NC \text{737\,mm} = \text{\dots\,m} \NC \text{245\,min} = \text{\dots\,d}\NR 
+ \NC \text{8\,cm\high{3}} = \text{\dots\,cl} \NC \text{237\,mm\high{2}} = \text{\dots\,cm\high{2}}\NR 
+ \NC \text{49\,cm} = \text{\dots\,dm} \NC \text{14\,l} = \text{\dots\,hl}\NR 
+
+\stoptabulate
+}  
+\stopfeladat
+
+
+
+\emptylines[1]\noindentation Hosszúhetény, 2019{.} május 27.
+
+\stopsubject
+
+\stopbodymatter
+\stopproduct
+\stopproject
